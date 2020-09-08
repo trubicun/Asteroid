@@ -25,16 +25,21 @@ public class Living : MonoBehaviour
 
     public void Die()
     {
-        _gamePlay.PlaySound();
-        _isDead = true;
-        _rigidbody.velocity = Vector3.zero;
-        gameObject.SetActive(false);
-        if (_currentLive > 0)
+        if (!_isDead)
         {
-            Invoke("Spawn", 5f);
-        } else
-        {
-            _gamePlay.StopGame();
+            _gamePlay.PlaySound();
+            _isDead = true;
+            _rigidbody.velocity = Vector3.zero;
+            gameObject.SetActive(false);
+            print("Current lives is " + _currentLive);
+            if (_currentLive > 0)
+            {
+                Invoke("Spawn", 5f);
+            }
+            else
+            {
+                _gamePlay.StopGame();
+            }
         }
     }
 
@@ -76,11 +81,13 @@ public class Living : MonoBehaviour
     {
         if (_isDead)
         {
+            print("Spawning");
             transform.position = Vector3.zero;
             _lives[_currentLive - 1].SetActive(false);
             _currentLive--;
             gameObject.SetActive(true);
             StartCoroutine(Invincibility());
+            _isDead = false;
         }
     }
 

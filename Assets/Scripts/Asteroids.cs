@@ -51,29 +51,29 @@ public class Asteroids : MonoBehaviour
     {
         _gameplay.PlaySound();
         _needToDestroy--;
-        Debug.Log("For next level you need to destroy: " + _needToDestroy);
         if (_needToDestroy == 0)
         {
             Invoke("NextLevel", 2f);
         }
     }
-
     public void Subdivide(Vector3 position, Vector3 velocity, int size)
     {
         _needToDestroy += 2;
-        //Находим новое случайное ускорение, и добавляем к имеющемуся
-        Vector3 randomSpeed = new Vector3(Random.Range(-_randomSpeed, _randomSpeed), Random.Range(-_randomSpeed, _randomSpeed));
-        Vector3 newVelocity = velocity + randomSpeed;
+        //Находим новое случайное ускорение
+        float randomSpeed = Random.Range(-_randomSpeed, _randomSpeed);
+        velocity = Vector2.one * randomSpeed + (Vector2) velocity;
         //Берём первый астероид
         GameObject asteroid = _asteroids.Take();
         asteroid.GetComponent<Asteroid>().SetSize(size - 1);
-        asteroid.GetComponent<Rigidbody>().velocity = newVelocity + Vector3.left;
+        //Добавляем первому астероиду новую скорость + угол 45 градусов
+        asteroid.GetComponent<Rigidbody>().velocity = Quaternion.Euler(0, 0, 45) * velocity;
         asteroid.transform.position = position;
         asteroid.SetActive(true);
         //Берём второй астероид
         asteroid = _asteroids.Take();
         asteroid.GetComponent<Asteroid>().SetSize(size - 1);
-        asteroid.GetComponent<Rigidbody>().velocity = newVelocity + Vector3.right;
+        //Добавляем второму астероиду новую скорость - угол 45 градусов
+        asteroid.GetComponent<Rigidbody>().velocity = Quaternion.Euler(0, 0, -45) * velocity;
         asteroid.transform.position = position;
         asteroid.SetActive(true);
 

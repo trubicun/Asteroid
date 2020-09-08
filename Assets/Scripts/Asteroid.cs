@@ -21,9 +21,9 @@ public class Asteroid : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void Start()
+    private void Update()
     {
-        
+        Debug.DrawRay(transform.position,_rigidbody.velocity);
     }
 
     private void OnTriggerEnter(Collider collider)

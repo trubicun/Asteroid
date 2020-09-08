@@ -38,11 +38,14 @@ public class Ufo : MonoBehaviour
     private void Update()
     {
         _shootingTimer += Time.deltaTime;
+        //НЛО долетает до края экрана - уничтожается. Если нужно вернуть то раскоментировать, и удалить скрипт BoundTeleportation
+        /* 
         float currentX = _camera.WorldToViewportPoint(transform.position).x;
         if (currentX < 0 | currentX > 1)
         {
             Destroy();
         }
+        */
         if (_shootingTimer >= _shootTime)
         {
             Shoot();
@@ -85,6 +88,7 @@ public class Ufo : MonoBehaviour
         if (collider.gameObject == _player)
         {
             _gamePlay.PlaySound();
+            _player.GetComponent<Living>().Die();
             Destroy();
         }
     }

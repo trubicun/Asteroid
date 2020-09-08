@@ -128,6 +128,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 142924683}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9099704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9099697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 090f74d7bfe5471429ac0f62e3031466, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &40557931
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,9 +920,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87859dd42efb820469d1ab45afa88cb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _huge: 100
+  _huge: 20
   _medium: 50
-  _small: 20
+  _small: 100
   _ufo: 200
 --- !u!82 &700153615
 AudioSource:
@@ -1611,7 +1623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _force: 300
   _maxSpeed: 4
-  _turn: 150
+  _turn: 200
 --- !u!54 &1184956361
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1653,7 +1665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maximumBullets: 10
-  _speed: 5
+  _speed: 8
   _time: 2
   _prefabBullet: {fileID: 8028999298489362581, guid: 4ff8ae7e76334ec489fe06271b2f73c0,
     type: 3}
@@ -2232,7 +2244,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -73.3}
+  m_AnchoredPosition: {x: 0, y: -73.29999}
   m_SizeDelta: {x: 238.00342, y: 39.644684}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1846959510
