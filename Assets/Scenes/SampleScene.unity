@@ -417,6 +417,21 @@ PrefabInstance:
       propertyPath: _speed
       value: 1.4
       objectReference: {fileID: 0}
+    - target: {fileID: -6882363619884447781, guid: ee141e4c5b9756f43b0040374d570e71,
+        type: 3}
+      propertyPath: _speedHorizontal
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6882363619884447781, guid: ee141e4c5b9756f43b0040374d570e71,
+        type: 3}
+      propertyPath: _amplitude
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -6882363619884447781, guid: ee141e4c5b9756f43b0040374d570e71,
+        type: 3}
+      propertyPath: _frequenz
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1860397877108609549, guid: ee141e4c5b9756f43b0040374d570e71,
         type: 3}
       propertyPath: m_Name

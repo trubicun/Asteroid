@@ -46,7 +46,10 @@ public class Scores : MonoBehaviour
             }
         } else
         {
-            SetScore(_ufo);
+            if (gameObject.tag == "Ufo")
+            {
+                SetScore(_ufo);
+            }
         }
     }
 

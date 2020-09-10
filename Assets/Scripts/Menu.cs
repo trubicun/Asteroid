@@ -21,6 +21,7 @@ public class Menu : MonoBehaviour
         _movement = FindObjectOfType<Movement>();
         _continueButtonText = _continueButton.transform.GetChild(0).gameObject.GetComponent<Text>();
         _gamePlay = FindObjectOfType<GamePlay>();
+        GetControl();
         Stop();
     }
 
@@ -81,11 +82,19 @@ public class Menu : MonoBehaviour
     }
     public void SetControl()
     {
-        _movement.SetSecondaryControl();
-        if (_movement.GetControl())
+        _movement.ChangeControl();
+        GetControl();
+    }
+
+    public void GetControl()
+    {
+        //1  управление с мышью
+        //-1 управление без мыши 
+        if (_movement.IsMouse())
         {
             _controlButtonText.text = "клавиатура + мышь";
-        } else
+        }
+        else
         {
             _controlButtonText.text = "клавиатура";
         }

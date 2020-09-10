@@ -56,6 +56,36 @@ public class Asteroids : MonoBehaviour
             Invoke("NextLevel", 2f);
         }
     }
+
+    /*
+    public void Subdivide(Vector3 position, Vector3 velocity, int size)
+    {
+        _needToDestroy += 2;
+        //Находим новое случайное ускорение, и добавляем к имеющемуся
+        Vector3 randomSpeed = new Vector3(Random.Range(-_randomSpeed, _randomSpeed), Random.Range(-_randomSpeed, _randomSpeed));
+        Vector3 newVelocity = velocity + randomSpeed;
+        print("Перед разделением у нас " + velocity);
+        print("Новое ускорение равно " + newVelocity);
+        //Берём первый астероид
+        GameObject asteroid = _asteroids.Take();
+        asteroid.GetComponent<Asteroid>().SetSize(size - 1);
+        //asteroid.GetComponent<Rigidbody>().velocity = newVelocity + Vector3.left;
+        asteroid.GetComponent<Rigidbody>().velocity = newVelocity;
+        print("Первый астероид улетает в " + asteroid.GetComponent<Rigidbody>().velocity);
+        asteroid.transform.position = position;
+        asteroid.SetActive(true);
+        //Берём второй астероид
+        asteroid = _asteroids.Take();
+        asteroid.GetComponent<Asteroid>().SetSize(size - 1);
+        //asteroid.GetComponent<Rigidbody>().velocity = newVelocity + Vector3.right;
+        newVelocity.x *= -1;
+         asteroid.GetComponent<Rigidbody>().velocity = newVelocity;
+        print("Второй астероид улетает в " + asteroid.GetComponent<Rigidbody>().velocity);
+        asteroid.transform.position = position;
+        asteroid.SetActive(true);
+
+    }
+    */
     public void Subdivide(Vector3 position, Vector3 velocity, int size)
     {
         _needToDestroy += 2;
@@ -65,14 +95,14 @@ public class Asteroids : MonoBehaviour
         //Берём первый астероид
         GameObject asteroid = _asteroids.Take();
         asteroid.GetComponent<Asteroid>().SetSize(size - 1);
-        //Добавляем первому астероиду новую скорость + угол 45 градусов
+        //Добавляем астероиду новую скорость + угол 45 градусов
         asteroid.GetComponent<Rigidbody>().velocity = Quaternion.Euler(0, 0, 45) * velocity;
         asteroid.transform.position = position;
         asteroid.SetActive(true);
         //Берём второй астероид
         asteroid = _asteroids.Take();
         asteroid.GetComponent<Asteroid>().SetSize(size - 1);
-        //Добавляем второму астероиду новую скорость - угол 45 градусов
+        //Добавляем астероиду новую скорость - угол 45 градусов
         asteroid.GetComponent<Rigidbody>().velocity = Quaternion.Euler(0, 0, -45) * velocity;
         asteroid.transform.position = position;
         asteroid.SetActive(true);

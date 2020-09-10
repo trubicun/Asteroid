@@ -53,9 +53,6 @@ public class Asteroid : MonoBehaviour
             //Если это большой астероид, то он появляется с краю экрана, и получает случайное направление
             transform.position = _camera.ViewportToWorldPoint(new Vector3(0, Random.Range(0f, 1.0f), 10));
             _rigidbody.velocity = CalculateRandomDirection();
-        } else
-        {
-
         }
     }
 

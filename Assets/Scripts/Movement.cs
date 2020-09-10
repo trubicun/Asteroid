@@ -7,21 +7,20 @@ public class Movement : MonoBehaviour
     [SerializeField] private float _turn = 150;
     private AudioSource _audio;
     private Camera _camera;
-    private bool _isSecondary;
     private Rigidbody _rigidbody;
+    private int _control;
 
     private void Start()
     {
         _audio = GetComponent<AudioSource>();
         _camera = FindObjectOfType<Camera>();
-        _isSecondary = false;
         _rigidbody = GetComponent<Rigidbody>();
+        _control = GetControl();
     }
 
     private void Update()
     {
-        //Secondary - Управление с мышью
-        if (_isSecondary)
+        if (IsMouse())
         {
             //Получаем направление к мыши
             Vector2 direction = (Vector2)_camera.ScreenToWorldPoint(Input.mousePosition) - (Vector2)transform.position;
@@ -62,12 +61,25 @@ public class Movement : MonoBehaviour
         }
     }
 
-    public void SetSecondaryControl()
+    public void ChangeControl()
     {
-        _isSecondary = !_isSecondary;
+        _control *= -1;
+        PlayerPrefs.SetInt("Control", _control);
     }
-    public bool GetControl()
+    public int GetControl()
     {
-        return _isSecondary;
+        //При самом первом запуске игры, всегда будет стоять клавиатура
+        if (PlayerPrefs.GetInt("Control") == 0)
+        {
+            PlayerPrefs.SetInt("Control", -1);
+        }
+        return PlayerPrefs.GetInt("Control");
+    }
+    public bool IsMouse()
+    {
+        //1 - Управление с мышью
+        //-1 - Управление без мыши
+        if (_control == 1) return true;
+        else return false;
     }
 }

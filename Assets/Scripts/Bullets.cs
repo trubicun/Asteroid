@@ -32,7 +32,7 @@ public class Bullets : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                if (_movement.GetControl())
+                if (_movement.IsMouse())
                 {
                     _bullets.Activate();
                 }

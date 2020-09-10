@@ -2,15 +2,17 @@
 
 public class Ufo : MonoBehaviour
 {
-    [SerializeField] private float _speed = 1.4f;
+    [SerializeField] private float _speedHorizontal = 2f;
+    [SerializeField] private float _amplitude = 3f;
+    [SerializeField] private float _frequenz = 2f;
     [SerializeField] private GameObject _bullet;
-    private Camera _camera;
     private GameObject _player;
     private GamePlay _gamePlay;
     private Rigidbody _rigidbody;
     private Bullets _bullets;
     private int _shootTime;
     private float _shootingTimer = 0;
+    float x, y;
 
     private void Start()
     {
@@ -18,27 +20,31 @@ public class Ufo : MonoBehaviour
         _gamePlay = FindObjectOfType<GamePlay>();
         _bullets = FindObjectOfType<Bullets>();
         _bullet.GetComponent<UfoBullet>().Init(_bullets.GetTime(), _bullets.GetSpeed());
-        _camera = FindObjectOfType<Camera>();
         _rigidbody = GetComponent<Rigidbody>();
         gameObject.SetActive(false);
     }
 
     public void SetLeft(bool val)
     {
-        if (val)
+        if (!val)
         {
-            _rigidbody.velocity = Vector2.right * _speed;
+            _speedHorizontal *= -1;
         }
-        else
-        {
-            _rigidbody.velocity = Vector2.left * _speed;
-        }
+    }
+
+    private void Move()
+    {
+        //y=a+b\sin(cx+d).
+        x = x + _speedHorizontal * Time.deltaTime;
+        y = Mathf.Sin(x * _frequenz) * _amplitude;
+        _rigidbody.velocity = new Vector2(_speedHorizontal, y);
     }
 
     private void Update()
     {
+        Move();
         _shootingTimer += Time.deltaTime;
-        //НЛО долетает до края экрана - уничтожается. Если нужно вернуть то раскоментировать, и удалить скрипт BoundTeleportation
+        //НЛО долетает до края экрана - уничтожается. Если нужно вернуть, то раскоментировать, и удалить скрипт BoundTeleportation
         /* 
         float currentX = _camera.WorldToViewportPoint(transform.position).x;
         if (currentX < 0 | currentX > 1)
