@@ -10,6 +10,7 @@ public class Menu : MonoBehaviour
     [SerializeField] private Text _Score;
     private GamePlay _gamePlay;
     private Movement _movement;
+    private Living _living;
     private Text _continueButtonText;
     private bool _isPaused;
     private AudioSource[] _audio;
@@ -17,6 +18,7 @@ public class Menu : MonoBehaviour
 
     private void Start()
     {
+        _living = FindObjectOfType<Living>();
         _audio = FindObjectsOfType<AudioSource>();
         _movement = FindObjectOfType<Movement>();
         _continueButtonText = _continueButton.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -27,14 +29,18 @@ public class Menu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (_gamePlay.IsRunning() & !_living.IsDead() | _isPaused)
         {
-            if (_isPaused)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Resume();
-            } else
-            {
-                Pause();
+                if (_isPaused)
+                {
+                    Resume();
+                }
+                else
+                {
+                    Pause();
+                }
             }
         }
     }
@@ -59,7 +65,7 @@ public class Menu : MonoBehaviour
     }
     public void Stop()
     {
-        _gamePlay.SetRunning(true);
+        _gamePlay.SetRunning(false);
         SetAudio(false);
         Time.timeScale = 0;
         _menu.SetActive(true);

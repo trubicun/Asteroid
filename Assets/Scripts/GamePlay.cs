@@ -42,6 +42,7 @@ public class GamePlay : MonoBehaviour
 
     public void NewGame()
     {
+
         _timer = 0;
         SetUfo(true);
         _ufo.GetComponent<Ufo>().Reload();
@@ -64,7 +65,8 @@ public class GamePlay : MonoBehaviour
         SetUfo(false);
         _timer = 0;
         _ufo.gameObject.SetActive(true);
-        float randomY = Random.Range(0.1f,0.9f);
+        //Возможно нужно учитывать амплитуду UFO
+        float randomY = Random.Range(0.2f,0.8f);
         if (Random.Range(0,2) == 0)
         {
             //Левая сторона

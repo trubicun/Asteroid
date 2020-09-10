@@ -38,9 +38,14 @@ public class Living : MonoBehaviour
             }
             else
             {
-                _gamePlay.StopGame();
+                Invoke("ToMenu", 5f);
             }
         }
+    }
+
+    private void ToMenu()
+    {
+        _gamePlay.StopGame();
     }
 
     private void Update()
@@ -116,5 +121,10 @@ public class Living : MonoBehaviour
         _mesh.enabled = true;
         _collider.enabled = true;
         _isBlinking = false;
+    }
+
+    public bool IsDead()
+    {
+        return _isDead;
     }
 }
